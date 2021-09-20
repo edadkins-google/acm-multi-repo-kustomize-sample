@@ -66,7 +66,7 @@ The example Git repository contains three namespaces for different tenants, four
 Fork the example repository into your organization and clone the forked repo locally.
 
 ```
-$ git clone https://github.com/<YOUR_ORGANIZATION>/namespaced-configuration.git configuration
+$ git clone https://github.com/<YOUR_ORGANIZATION>/acm-multi-repo-kustomize-sample.git configuration
 ```
 
 After making changes i.e. adding a new tenant or cluster, you should rebuild the kustomize output by running the `render.sh` script.
