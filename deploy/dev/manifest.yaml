@@ -1,0 +1,140 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  labels:
+    changed: label for tenant-a only in the dev environment
+    cluster: dev-cluster
+    environment: dev
+    tenant: tenant-a
+  name: dev-cluster-tenant-a
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  labels:
+    cluster: dev-cluster
+    environment: dev
+    tenant: tenant-a
+  name: dev-cluster-tenant-admin
+  namespace: tenant-a
+rules:
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - '*'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  labels:
+    change: default
+    cluster: dev-cluster
+    environment: dev
+    tenant: tenant-a
+  name: dev-cluster-tenant-admin-rolebinding
+  namespace: tenant-a
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: dev-cluster-tenant-admin
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: tenant-a-admin@mydomain.com
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  labels:
+    cluster: dev-cluster
+    environment: dev
+  name: dev-cluster-Datadog
+spec:
+  selector:
+    matchLabels:
+      app: Datadog
+      cluster: dev-cluster
+      environment: dev
+  template:
+    metadata:
+      annotations:
+        configsync.gke.io/cluster-name-selector: dev-cluster
+      labels:
+        app: Datadog
+        cluster: dev-cluster
+        environment: dev
+    spec:
+      containers:
+      - image: httpd
+        name: Datadog
+        ports:
+        - containerPort: 80
+---
+apiVersion: configsync.gke.io/v1beta1
+kind: RepoSync
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  labels:
+    cluster: dev-cluster
+    environment: dev
+    tenant: tenant-a
+  name: dev-cluster-repo-sync
+  namespace: tenant-a
+spec:
+  git:
+    auth: token
+    branch: tenant-a
+    repo: https://github.com/acm/dev.git
+    secretRef:
+      name: repo-secret
+  sourceFormat: unstructured
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequiredLabels
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  change: label for cluster wide objects across all environments
+  labels:
+    cluster: dev-cluster
+    environment: dev
+  name: dev-cluster-ns-must-have-geo
+spec:
+  match:
+    kinds:
+    - apiGroups:
+      - ""
+      kinds:
+      - Namespace
+  parameters:
+    labels:
+    - key: geo
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  labels:
+    cluster: dev-cluster
+    environment: dev
+    tenant: tenant-a
+  name: dev-cluster-default-deny-ingress
+  namespace: tenant-a
+spec:
+  ingress:
+  - {}
+  podSelector: {}
+  policyTypes:
+  - Ingress
