@@ -1,1 +1,87 @@
 # acm-multi-repo-kustomize-sample
+
+## Before you begin
+This section describes prerequisites you must meet before this tutorial.
+- ConfigSync is installed on your cluster, with the version at least 1.7.0. If not, you can install
+  it following the [instructions](https://cloud.google.com/anthos-config-management/docs/how-to/installing-config-sync).
+- `git` is installed in your local machine.
+- `kustomize` is installed in your local machine. If not, you can install it by `gcloud components install kustomize`.
+
+## Get the example configuration
+The example Git repository contains three namespaces for different tenants, four clusters and three different environments. The repository contains the  following directories and files.
+```
+├── deploy
+│   ├── dev
+│   │   └── manifest.yaml
+│   ├── pre-prod
+│   │   └── manifest.yaml
+│   └── prod
+│       └── manifest.yaml
+├── script
+│   └── render.sh
+└── source
+    ├── base
+    │   ├── cluster
+    │   │   ├── agents
+    │   │   │   └── datadog.yaml
+    │   │   ├── kustomization.yaml
+    │   │   └── policies
+    │   │       └── K8sRequiredLabels.yaml
+    │   └── namespace
+    │       ├── kustomization.yaml
+    │       ├── namespace.yaml
+    │       ├── networkpolicy.yaml
+    │       ├── reposync.yaml
+    │       ├── role.yaml
+    │       └── rolebinding.yaml
+    ├── clusters
+    │   ├── dev-cluster
+    │   │   ├── kustomization.yaml
+    │   │   └── tenant-a
+    │   │       ├── namespace.yaml
+    │   │       └── networkpolicy.yaml
+    │   ├── pre-prod-cluster
+    │   │   └── kustomization.yaml
+    │   ├── prod-cluster-lon
+    │   │   └── kustomization.yaml
+    │   └── prod-cluster-ny
+    │       └── kustomization.yaml
+    ├── environments
+    │   ├── dev
+    │   │   └── kustomization.yaml
+    │   ├── pre-prod
+    │   │   └── kustomization.yaml
+    │   └── prod
+    │       └── kustomization.yaml
+    └── tenants
+        ├── tenant-a
+        │   └── kustomization.yaml
+        ├── tenant-b
+        │   ├── kustomization.yaml
+        │   └── role.yaml
+        └── tenant-c
+            └── kustomization.yaml
+```
+
+Fork the example repository into your organization and clone the forked repo locally.
+
+```
+$ git clone https://github.com/<YOUR_ORGANIZATION>/namespaced-configuration.git configuration
+```
+
+After making changes i.e. adding a new tenant or cluster, you should rebuild the kustomize output by running the `render.sh` script.
+```
+$ ./scripts/render.sh
+```
+
+Then you can commit and push the update.
+
+```
+$ git add .
+$ git commit -m 'update configuration'
+$ git push origin main
+```
+
+Note that in this example, the kustomize output is written into a different
+directory on the same branch in the same Git repository. You can also write
+the kustomize output into a different Git repository if desired.
