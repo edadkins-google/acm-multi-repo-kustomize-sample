@@ -2,8 +2,8 @@
 
 ## Before you begin
 This section describes prerequisites you must meet before this tutorial.
-- ConfigSync is installed on your cluster, with the version at least 1.7.0. If not, you can install
-  it following the [instructions](https://cloud.google.com/anthos-config-management/docs/how-to/installing-config-sync).
+- ConfigSync is installed on your cluster, with multi-repo enabled and the RootSync resource deployed. If not, you can install
+  it following the [instructions](https://cloud.google.com/anthos-config-management/docs/how-to/multi-repo#root-sync).
 - `git` is installed in your local machine.
 - `kustomize` is installed in your local machine. If not, you can install it by `gcloud components install kustomize`.
 
