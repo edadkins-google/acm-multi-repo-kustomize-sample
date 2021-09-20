@@ -1,0 +1,15 @@
+namePrefix: dev-
+commonLabels:
+  environment: dev
+
+resources:
+- ../../clusters/dev-cluster
+
+patches:
+- target:
+    kind: RepoSync
+    name: repo-sync
+  patch: |-
+    - op: replace
+      path: /spec/git/repo
+      value: https://github.com/acm/dev.git

@@ -1,0 +1,30 @@
+namespace: tenant-c
+
+commonLabels:
+  tenant: tenant-c
+
+resources:
+- ../../base/namespace
+
+patches:
+- target:
+    kind: RoleBinding
+    name: tenant-admin-rolebinding
+  patch: |-
+    - op: replace
+      path: /subjects/0/name
+      value: tenant-c-admin@mydomain.com
+- target:
+    kind: Namespace
+    name: default
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: tenant-c
+- target:
+    kind: RepoSync
+    name: repo-sync
+  patch: |-
+    - op: replace
+      path: /spec/git/branch
+      value: tenant-c

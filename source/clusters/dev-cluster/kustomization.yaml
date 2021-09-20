@@ -1,0 +1,15 @@
+namePrefix: cluster-
+
+resources:
+- ../../base/cluster
+- ../../tenants/tenant-a
+
+commonLabels:
+  cluster: dev-cluster
+
+commonAnnotations:
+  configsync.gke.io/cluster-name-selector: dev-cluster
+
+patchesStrategicMerge:
+- tenant-a/namespace.yaml
+- tenant-a/networkpolicy.yaml

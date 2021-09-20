@@ -1,0 +1,33 @@
+namespace: tenant-b
+
+commonLabels:
+  tenant: tenant-b
+
+resources:
+- ../../base/namespace
+
+patches:
+- target:
+    kind: RoleBinding
+    name: tenant-admin-rolebinding
+  patch: |-
+    - op: replace
+      path: /subjects/0/name
+      value: tenant-b-admin@mydomain.com
+- target:
+    kind: Namespace
+    name: default
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: tenant-b
+- target:
+    kind: RepoSync
+    name: repo-sync
+  patch: |-
+    - op: replace
+      path: /spec/git/branch
+      value: tenant-b
+
+patchesStrategicMerge:
+- role.yaml

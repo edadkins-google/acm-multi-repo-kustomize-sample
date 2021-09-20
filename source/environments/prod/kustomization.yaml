@@ -1,0 +1,16 @@
+namePrefix: prod-
+commonLabels:
+  environment: prod
+
+resources:
+- ../../clusters/prod-cluster-lon
+- ../../clusters/prod-cluster-ny
+
+patches:
+- target:
+    kind: RepoSync
+    name: repo-sync
+  patch: |-
+    - op: replace
+      path: /spec/git/repo
+      value: https://github.com/acm/prod.git

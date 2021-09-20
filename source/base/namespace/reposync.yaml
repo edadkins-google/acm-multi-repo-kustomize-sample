@@ -1,0 +1,13 @@
+apiVersion: configsync.gke.io/v1beta1
+kind: RepoSync
+metadata:
+  name: repo-sync
+  namespace: default
+spec:
+  sourceFormat: unstructured
+  git:
+   repo: https://github.com/repo.git
+   branch: branch
+   auth: token
+   secretRef:
+     name: repo-secret

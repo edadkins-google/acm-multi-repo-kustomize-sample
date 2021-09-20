@@ -1,0 +1,11 @@
+namePrefix: lon-
+
+resources:
+- ../../base/cluster
+- ../../tenants/tenant-a
+
+commonLabels:
+  cluster: prod-cluster-lon
+
+commonAnnotations:
+  configsync.gke.io/cluster-name-selector: prod-cluster-lon

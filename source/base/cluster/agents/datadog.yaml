@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: Datadog
+spec:
+  selector:
+    matchLabels:
+      app: Datadog
+  template:
+    metadata:
+      labels:
+        app: Datadog
+    spec:
+      containers:
+        - name: Datadog
+          image: httpd
+          ports:
+          - containerPort: 80

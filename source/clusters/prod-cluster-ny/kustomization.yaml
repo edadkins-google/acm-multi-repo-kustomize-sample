@@ -1,0 +1,12 @@
+namePrefix: ny-
+
+resources:
+- ../../base/cluster
+- ../../tenants/tenant-a
+- ../../tenants/tenant-b
+
+commonLabels:
+  cluster: prod-cluster-ny
+
+commonAnnotations:
+  configsync.gke.io/cluster-name-selector: prod-cluster-ny
