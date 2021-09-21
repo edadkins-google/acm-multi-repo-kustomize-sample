@@ -107,7 +107,6 @@ kind: K8sRequiredLabels
 metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: dev-cluster
-  change: label for cluster wide objects across all environments
   labels:
     cluster: dev-cluster
     environment: dev

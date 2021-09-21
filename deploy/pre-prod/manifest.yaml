@@ -106,7 +106,6 @@ kind: K8sRequiredLabels
 metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: pre-prod-cluster
-  change: label for cluster wide objects across all environments
   labels:
     cluster: pre-prod-cluster
     environment: pre-prod

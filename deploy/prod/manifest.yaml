@@ -279,7 +279,6 @@ kind: K8sRequiredLabels
 metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: prod-cluster-lon
-  change: label for cluster wide objects across all environments
   labels:
     cluster: prod-cluster-lon
     environment: prod
@@ -300,7 +299,6 @@ kind: K8sRequiredLabels
 metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: prod-cluster-ny
-  change: label for cluster wide objects across all environments
   labels:
     cluster: prod-cluster-ny
     environment: prod
