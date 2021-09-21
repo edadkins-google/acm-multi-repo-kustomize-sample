@@ -3,8 +3,5 @@ namePrefix: pre-prod-cluster-
 resources:
 - ../../tenants/tenant-a
 
-commonLabels:
-  cluster: pre-prod-cluster
-
 commonAnnotations:
   configsync.gke.io/cluster-name-selector: pre-prod-cluster

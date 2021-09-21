@@ -4,7 +4,6 @@ metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: prod-cluster-lon
   labels:
-    cluster: prod-cluster-lon
     environment: prod
     geo: uk
     tenant: tenant-a
@@ -16,7 +15,6 @@ metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
-    cluster: prod-cluster-ny
     environment: prod
     geo: uk
     tenant: tenant-a
@@ -28,7 +26,6 @@ metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
-    cluster: prod-cluster-ny
     environment: prod
     tenant: tenant-b
   name: prod-cluster-ny-tenant-b
@@ -39,7 +36,6 @@ metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: prod-cluster-lon
   labels:
-    cluster: prod-cluster-lon
     environment: prod
     geo: uk
     tenant: tenant-a
@@ -59,7 +55,6 @@ metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
-    cluster: prod-cluster-ny
     environment: prod
     geo: uk
     tenant: tenant-a
@@ -80,7 +75,6 @@ metadata:
     configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
     changed: label for tenant-b across all environments
-    cluster: prod-cluster-ny
     environment: prod
     tenant: tenant-b
   name: prod-cluster-ny-tenant-admin
@@ -100,7 +94,6 @@ metadata:
     configsync.gke.io/cluster-name-selector: prod-cluster-lon
   labels:
     change: default
-    cluster: prod-cluster-lon
     environment: prod
     geo: uk
     tenant: tenant-a
@@ -122,7 +115,6 @@ metadata:
     configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
     change: default
-    cluster: prod-cluster-ny
     environment: prod
     geo: uk
     tenant: tenant-a
@@ -144,7 +136,6 @@ metadata:
     configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
     change: default
-    cluster: prod-cluster-ny
     environment: prod
     tenant: tenant-b
   name: prod-cluster-ny-tenant-admin-rolebinding
@@ -204,7 +195,6 @@ metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: prod-cluster-lon
   labels:
-    cluster: prod-cluster-lon
     environment: prod
     geo: uk
     tenant: tenant-a
@@ -221,7 +211,6 @@ metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
-    cluster: prod-cluster-ny
     environment: prod
     geo: uk
     tenant: tenant-a
@@ -238,7 +227,6 @@ metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
-    cluster: prod-cluster-ny
     environment: prod
     tenant: tenant-b
   name: prod-cluster-ny-default-deny-ingress

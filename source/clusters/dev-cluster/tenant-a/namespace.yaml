@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: tenant-a
-  labels:
-    changed: label-for-tenant-a-only-in-the-dev-environment
