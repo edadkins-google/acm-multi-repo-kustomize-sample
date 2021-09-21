@@ -4,7 +4,7 @@ metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: dev-cluster
   labels:
-    changed: label for tenant-a only in the dev environment
+    changed: label-for-tenant-a-only-in-the-dev-environment
     cluster: dev-cluster
     environment: dev
     geo: uk
