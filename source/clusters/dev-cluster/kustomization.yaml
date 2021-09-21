@@ -12,4 +12,3 @@ commonAnnotations:
 
 patchesStrategicMerge:
 - tenant-a/namespace.yaml
-- tenant-a/networkpolicy.yaml

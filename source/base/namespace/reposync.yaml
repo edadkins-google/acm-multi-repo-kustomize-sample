@@ -8,6 +8,4 @@ spec:
   git:
    repo: https://github.com/repo.git
    branch: branch
-   auth: token
-   secretRef:
-     name: repo-secret
+   auth: none

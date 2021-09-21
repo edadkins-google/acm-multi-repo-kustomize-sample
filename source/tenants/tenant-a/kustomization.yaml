@@ -26,5 +26,5 @@ patches:
     name: repo-sync
   patch: |-
     - op: replace
-      path: /spec/git/branch
-      value: tenant-a
+      path: /spec/git/repo
+      value: https://github.com/ejmadkins/acm-multi-repo-tenant-a.git

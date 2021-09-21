@@ -11,5 +11,5 @@ patches:
     name: repo-sync
   patch: |-
     - op: replace
-      path: /spec/git/repo
-      value: https://github.com/acm/dev.git
+      path: /spec/git/branch
+      value: dev
