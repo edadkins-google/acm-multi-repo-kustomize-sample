@@ -26,8 +26,8 @@ patches:
     name: repo-sync
   patch: |-
     - op: replace
-      path: /spec/git/branch
-      value: tenant-b
+      path: /spec/git/repo
+      value: https://github.com/ejmadkins/acm-multi-repo-tenant-b.git
 
 patchesStrategicMerge:
 - role.yaml

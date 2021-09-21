@@ -8,7 +8,7 @@ metadata:
     environment: pre-prod
     geo: uk
     tenant: tenant-a
-  name: pre-prod-cluster-tenant-a
+  name: tenant-a
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -20,7 +20,7 @@ metadata:
     environment: pre-prod
     geo: uk
     tenant: tenant-a
-  name: pre-prod-cluster-tenant-admin
+  name: tenant-admin
   namespace: tenant-a
 rules:
 - apiGroups:
@@ -41,12 +41,12 @@ metadata:
     environment: pre-prod
     geo: uk
     tenant: tenant-a
-  name: pre-prod-cluster-tenant-admin-rolebinding
+  name: tenant-admin-rolebinding
   namespace: tenant-a
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: pre-prod-cluster-tenant-admin
+  name: tenant-admin
 subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: Group
@@ -60,7 +60,7 @@ metadata:
   labels:
     cluster: pre-prod-cluster
     environment: pre-prod
-  name: pre-prod-cluster-datadog
+  name: datadog
 spec:
   selector:
     matchLabels:
@@ -92,13 +92,13 @@ metadata:
     environment: pre-prod
     geo: uk
     tenant: tenant-a
-  name: pre-prod-cluster-repo-sync
+  name: repo-sync
   namespace: tenant-a
 spec:
   git:
     auth: none
-    branch: branch
-    repo: https://github.com/acm/pre-prod.git
+    branch: pre-prod
+    repo: https://github.com/ejmadkins/acm-multi-repo-tenant-a.git
   sourceFormat: unstructured
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
@@ -109,7 +109,7 @@ metadata:
   labels:
     cluster: pre-prod-cluster
     environment: pre-prod
-  name: pre-prod-cluster-ns-must-have-geo
+  name: ns-must-have-geo
 spec:
   match:
     kinds:
@@ -131,7 +131,7 @@ metadata:
     environment: pre-prod
     geo: uk
     tenant: tenant-a
-  name: pre-prod-cluster-default-deny-ingress
+  name: default-deny-ingress
   namespace: tenant-a
 spec:
   podSelector: {}

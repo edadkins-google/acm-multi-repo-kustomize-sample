@@ -8,7 +8,7 @@ metadata:
     environment: prod
     geo: uk
     tenant: tenant-a
-  name: prod-lon-tenant-a
+  name: lon-tenant-a
 ---
 apiVersion: v1
 kind: Namespace
@@ -20,7 +20,7 @@ metadata:
     environment: prod
     geo: uk
     tenant: tenant-a
-  name: prod-ny-tenant-a
+  name: ny-tenant-a
 ---
 apiVersion: v1
 kind: Namespace
@@ -31,7 +31,7 @@ metadata:
     cluster: prod-cluster-ny
     environment: prod
     tenant: tenant-b
-  name: prod-ny-tenant-b
+  name: ny-tenant-b
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -43,7 +43,7 @@ metadata:
     environment: prod
     geo: uk
     tenant: tenant-a
-  name: prod-lon-tenant-admin
+  name: lon-tenant-admin
   namespace: tenant-a
 rules:
 - apiGroups:
@@ -63,7 +63,7 @@ metadata:
     environment: prod
     geo: uk
     tenant: tenant-a
-  name: prod-ny-tenant-admin
+  name: ny-tenant-admin
   namespace: tenant-a
 rules:
 - apiGroups:
@@ -83,7 +83,7 @@ metadata:
     cluster: prod-cluster-ny
     environment: prod
     tenant: tenant-b
-  name: prod-ny-tenant-admin
+  name: ny-tenant-admin
   namespace: tenant-b
 rules:
 - apiGroups:
@@ -104,12 +104,12 @@ metadata:
     environment: prod
     geo: uk
     tenant: tenant-a
-  name: prod-lon-tenant-admin-rolebinding
+  name: lon-tenant-admin-rolebinding
   namespace: tenant-a
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: prod-lon-tenant-admin
+  name: lon-tenant-admin
 subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: Group
@@ -126,12 +126,12 @@ metadata:
     environment: prod
     geo: uk
     tenant: tenant-a
-  name: prod-ny-tenant-admin-rolebinding
+  name: ny-tenant-admin-rolebinding
   namespace: tenant-a
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: prod-ny-tenant-admin
+  name: ny-tenant-admin
 subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: Group
@@ -147,12 +147,12 @@ metadata:
     cluster: prod-cluster-ny
     environment: prod
     tenant: tenant-b
-  name: prod-ny-tenant-admin-rolebinding
+  name: ny-tenant-admin-rolebinding
   namespace: tenant-b
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: prod-ny-tenant-admin
+  name: ny-tenant-admin
 subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: Group
@@ -166,7 +166,7 @@ metadata:
   labels:
     cluster: prod-cluster-lon
     environment: prod
-  name: prod-lon-datadog
+  name: lon-datadog
 spec:
   selector:
     matchLabels:
@@ -196,7 +196,7 @@ metadata:
   labels:
     cluster: prod-cluster-ny
     environment: prod
-  name: prod-ny-datadog
+  name: ny-datadog
 spec:
   selector:
     matchLabels:
@@ -228,13 +228,13 @@ metadata:
     environment: prod
     geo: uk
     tenant: tenant-a
-  name: prod-lon-repo-sync
+  name: lon-repo-sync
   namespace: tenant-a
 spec:
   git:
     auth: none
-    branch: branch
-    repo: https://github.com/acm/prod.git
+    branch: prod
+    repo: https://github.com/ejmadkins/acm-multi-repo-tenant-a.git
   sourceFormat: unstructured
 ---
 apiVersion: configsync.gke.io/v1beta1
@@ -247,13 +247,13 @@ metadata:
     environment: prod
     geo: uk
     tenant: tenant-a
-  name: prod-ny-repo-sync
+  name: ny-repo-sync
   namespace: tenant-a
 spec:
   git:
     auth: none
-    branch: branch
-    repo: https://github.com/acm/prod.git
+    branch: prod
+    repo: https://github.com/ejmadkins/acm-multi-repo-tenant-a.git
   sourceFormat: unstructured
 ---
 apiVersion: configsync.gke.io/v1beta1
@@ -265,13 +265,13 @@ metadata:
     cluster: prod-cluster-ny
     environment: prod
     tenant: tenant-b
-  name: prod-ny-repo-sync
+  name: ny-repo-sync
   namespace: tenant-b
 spec:
   git:
     auth: none
-    branch: tenant-b
-    repo: https://github.com/acm/prod.git
+    branch: prod
+    repo: https://github.com/ejmadkins/acm-multi-repo-tenant-b.git
   sourceFormat: unstructured
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
@@ -282,7 +282,7 @@ metadata:
   labels:
     cluster: prod-cluster-lon
     environment: prod
-  name: prod-lon-ns-must-have-geo
+  name: lon-ns-must-have-geo
 spec:
   match:
     kinds:
@@ -302,7 +302,7 @@ metadata:
   labels:
     cluster: prod-cluster-ny
     environment: prod
-  name: prod-ny-ns-must-have-geo
+  name: ny-ns-must-have-geo
 spec:
   match:
     kinds:
@@ -324,7 +324,7 @@ metadata:
     environment: prod
     geo: uk
     tenant: tenant-a
-  name: prod-lon-default-deny-ingress
+  name: lon-default-deny-ingress
   namespace: tenant-a
 spec:
   podSelector: {}
@@ -341,7 +341,7 @@ metadata:
     environment: prod
     geo: uk
     tenant: tenant-a
-  name: prod-ny-default-deny-ingress
+  name: ny-default-deny-ingress
   namespace: tenant-a
 spec:
   podSelector: {}
@@ -357,7 +357,7 @@ metadata:
     cluster: prod-cluster-ny
     environment: prod
     tenant: tenant-b
-  name: prod-ny-default-deny-ingress
+  name: ny-default-deny-ingress
   namespace: tenant-b
 spec:
   podSelector: {}
