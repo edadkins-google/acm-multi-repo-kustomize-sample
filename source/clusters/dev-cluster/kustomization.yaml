@@ -1,7 +1,6 @@
-namePrefix: cluster-
+namePrefix: dev-cluster-
 
 resources:
-- ../../base/cluster
 - ../../tenants/tenant-a
 
 commonLabels:

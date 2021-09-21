@@ -1,7 +1,6 @@
-namePrefix: cluster-
+namePrefix: pre-prod-cluster-
 
 resources:
-- ../../base/cluster
 - ../../tenants/tenant-a
 
 commonLabels:

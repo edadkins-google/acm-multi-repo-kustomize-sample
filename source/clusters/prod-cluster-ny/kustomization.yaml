@@ -1,7 +1,5 @@
-namePrefix: ny-
-
+namePrefix: prod-cluster-ny-
 resources:
-- ../../base/cluster
 - ../../tenants/tenant-a
 - ../../tenants/tenant-b
 

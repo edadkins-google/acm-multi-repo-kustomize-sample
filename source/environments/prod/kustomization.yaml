@@ -1,8 +1,8 @@
-namePrefix: prod-
 commonLabels:
   environment: prod
 
 resources:
+- ../../base/cluster
 - ../../clusters/prod-cluster-lon
 - ../../clusters/prod-cluster-ny
 
@@ -14,3 +14,4 @@ patches:
     - op: replace
       path: /spec/git/branch
       value: prod
+

@@ -1,7 +1,5 @@
-namePrefix: lon-
-
+namePrefix: prod-cluster-lon-
 resources:
-- ../../base/cluster
 - ../../tenants/tenant-a
 
 commonLabels:
