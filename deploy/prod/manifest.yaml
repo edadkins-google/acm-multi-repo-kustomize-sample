@@ -225,11 +225,9 @@ metadata:
   namespace: tenant-a
 spec:
   git:
-    auth: token
-    branch: tenant-a
+    auth: none
+    branch: branch
     repo: https://github.com/acm/prod.git
-    secretRef:
-      name: repo-secret
   sourceFormat: unstructured
 ---
 apiVersion: configsync.gke.io/v1beta1
@@ -245,11 +243,9 @@ metadata:
   namespace: tenant-a
 spec:
   git:
-    auth: token
-    branch: tenant-a
+    auth: none
+    branch: branch
     repo: https://github.com/acm/prod.git
-    secretRef:
-      name: repo-secret
   sourceFormat: unstructured
 ---
 apiVersion: configsync.gke.io/v1beta1
@@ -265,11 +261,9 @@ metadata:
   namespace: tenant-b
 spec:
   git:
-    auth: token
+    auth: none
     branch: tenant-b
     repo: https://github.com/acm/prod.git
-    secretRef:
-      name: repo-secret
   sourceFormat: unstructured
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1

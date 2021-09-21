@@ -93,11 +93,9 @@ metadata:
   namespace: tenant-a
 spec:
   git:
-    auth: token
-    branch: tenant-a
-    repo: https://github.com/acm/dev.git
-    secretRef:
-      name: repo-secret
+    auth: none
+    branch: dev
+    repo: https://github.com/ejmadkins/acm-multi-repo-tenant-a.git
   sourceFormat: unstructured
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
@@ -133,8 +131,6 @@ metadata:
   name: dev-cluster-default-deny-ingress
   namespace: tenant-a
 spec:
-  ingress:
-  - {}
   podSelector: {}
   policyTypes:
   - Ingress
