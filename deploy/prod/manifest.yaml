@@ -160,11 +160,11 @@ metadata:
   labels:
     cluster: prod-cluster-lon
     environment: prod
-  name: prod-lon-Datadog
+  name: prod-lon-datadog
 spec:
   selector:
     matchLabels:
-      app: Datadog
+      app: datadog
       cluster: prod-cluster-lon
       environment: prod
   template:
@@ -172,13 +172,13 @@ spec:
       annotations:
         configsync.gke.io/cluster-name-selector: prod-cluster-lon
       labels:
-        app: Datadog
+        app: datadog
         cluster: prod-cluster-lon
         environment: prod
     spec:
       containers:
       - image: httpd
-        name: Datadog
+        name: datadog
         ports:
         - containerPort: 80
 ---
@@ -190,11 +190,11 @@ metadata:
   labels:
     cluster: prod-cluster-ny
     environment: prod
-  name: prod-ny-Datadog
+  name: prod-ny-datadog
 spec:
   selector:
     matchLabels:
-      app: Datadog
+      app: datadog
       cluster: prod-cluster-ny
       environment: prod
   template:
@@ -202,13 +202,13 @@ spec:
       annotations:
         configsync.gke.io/cluster-name-selector: prod-cluster-ny
       labels:
-        app: Datadog
+        app: datadog
         cluster: prod-cluster-ny
         environment: prod
     spec:
       containers:
       - image: httpd
-        name: Datadog
+        name: datadog
         ports:
         - containerPort: 80
 ---

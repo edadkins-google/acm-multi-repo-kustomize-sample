@@ -57,11 +57,11 @@ metadata:
   labels:
     cluster: pre-prod-cluster
     environment: pre-prod
-  name: pre-prod-cluster-Datadog
+  name: pre-prod-cluster-datadog
 spec:
   selector:
     matchLabels:
-      app: Datadog
+      app: datadog
       cluster: pre-prod-cluster
       environment: pre-prod
   template:
@@ -69,13 +69,13 @@ spec:
       annotations:
         configsync.gke.io/cluster-name-selector: pre-prod-cluster
       labels:
-        app: Datadog
+        app: datadog
         cluster: pre-prod-cluster
         environment: pre-prod
     spec:
       containers:
       - image: httpd
-        name: Datadog
+        name: datadog
         ports:
         - containerPort: 80
 ---

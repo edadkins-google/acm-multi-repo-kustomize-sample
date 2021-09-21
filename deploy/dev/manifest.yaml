@@ -58,11 +58,11 @@ metadata:
   labels:
     cluster: dev-cluster
     environment: dev
-  name: dev-cluster-Datadog
+  name: dev-cluster-datadog
 spec:
   selector:
     matchLabels:
-      app: Datadog
+      app: datadog
       cluster: dev-cluster
       environment: dev
   template:
@@ -70,13 +70,13 @@ spec:
       annotations:
         configsync.gke.io/cluster-name-selector: dev-cluster
       labels:
-        app: Datadog
+        app: datadog
         cluster: dev-cluster
         environment: dev
     spec:
       containers:
       - image: httpd
-        name: Datadog
+        name: datadog
         ports:
         - containerPort: 80
 ---
