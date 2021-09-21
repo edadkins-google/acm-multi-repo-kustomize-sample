@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: prod-cluster-lon
+  labels:
+    cluster: prod-cluster-lon
+    environment: prod
+    geo: uk
+    tenant: tenant-a
+  name: prod-lon-tenant-a

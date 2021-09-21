@@ -1,3 +1,4 @@
+namePrefix: cluster-
 
 resources:
 - ../../base/cluster

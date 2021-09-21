@@ -1,3 +1,4 @@
+namePrefix: pre-prod-
 commonLabels:
   environment: pre-prod
 

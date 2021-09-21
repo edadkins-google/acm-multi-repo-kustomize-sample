@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  labels:
+    changed: label-for-tenant-a-only-in-the-dev-environment
+    cluster: dev-cluster
+    environment: dev
+    geo: uk
+    tenant: tenant-a
+  name: dev-cluster-tenant-a

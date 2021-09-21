@@ -1,3 +1,4 @@
+namePrefix: dev-
 commonLabels:
   environment: dev
 

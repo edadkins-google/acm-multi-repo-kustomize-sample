@@ -1,0 +1,19 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: prod-cluster-ny
+  labels:
+    cluster: prod-cluster-ny
+    environment: prod
+    geo: uk
+    tenant: tenant-a
+  name: prod-ny-tenant-admin
+  namespace: tenant-a
+rules:
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - '*'

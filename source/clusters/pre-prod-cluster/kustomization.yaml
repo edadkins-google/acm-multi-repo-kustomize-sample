@@ -1,3 +1,5 @@
+namePrefix: cluster-
+
 resources:
 - ../../base/cluster
 - ../../tenants/tenant-a

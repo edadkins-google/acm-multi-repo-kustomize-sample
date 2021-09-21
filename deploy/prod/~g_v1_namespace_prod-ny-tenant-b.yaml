@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: prod-cluster-ny
+  labels:
+    cluster: prod-cluster-ny
+    environment: prod
+    tenant: tenant-b
+  name: prod-ny-tenant-b

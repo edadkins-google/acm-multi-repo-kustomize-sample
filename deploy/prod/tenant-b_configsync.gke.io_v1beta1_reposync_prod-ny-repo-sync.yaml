@@ -1,0 +1,17 @@
+apiVersion: configsync.gke.io/v1beta1
+kind: RepoSync
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: prod-cluster-ny
+  labels:
+    cluster: prod-cluster-ny
+    environment: prod
+    tenant: tenant-b
+  name: prod-ny-repo-sync
+  namespace: tenant-b
+spec:
+  git:
+    auth: none
+    branch: prod
+    repo: https://github.com/ejmadkins/acm-multi-repo-tenant-b.git
+  sourceFormat: unstructured

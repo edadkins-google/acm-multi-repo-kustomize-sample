@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  labels:
+    cluster: dev-cluster
+    environment: dev
+  name: dev-cluster-datadog
+spec:
+  selector:
+    matchLabels:
+      app: datadog
+      cluster: dev-cluster
+      environment: dev
+  template:
+    metadata:
+      annotations:
+        configsync.gke.io/cluster-name-selector: dev-cluster
+      labels:
+        app: datadog
+        cluster: dev-cluster
+        environment: dev
+    spec:
+      containers:
+      - image: httpd
+        name: datadog
+        ports:
+        - containerPort: 80

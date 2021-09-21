@@ -1,0 +1,18 @@
+apiVersion: configsync.gke.io/v1beta1
+kind: RepoSync
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: prod-cluster-lon
+  labels:
+    cluster: prod-cluster-lon
+    environment: prod
+    geo: uk
+    tenant: tenant-a
+  name: prod-lon-repo-sync
+  namespace: tenant-a
+spec:
+  git:
+    auth: none
+    branch: prod
+    repo: https://github.com/ejmadkins/acm-multi-repo-tenant-a.git
+  sourceFormat: unstructured
