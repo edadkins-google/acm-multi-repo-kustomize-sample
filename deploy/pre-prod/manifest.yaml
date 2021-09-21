@@ -6,6 +6,7 @@ metadata:
   labels:
     cluster: pre-prod-cluster
     environment: pre-prod
+    geo: uk
     tenant: tenant-a
   name: pre-prod-cluster-tenant-a
 ---
@@ -17,6 +18,7 @@ metadata:
   labels:
     cluster: pre-prod-cluster
     environment: pre-prod
+    geo: uk
     tenant: tenant-a
   name: pre-prod-cluster-tenant-admin
   namespace: tenant-a
@@ -37,6 +39,7 @@ metadata:
     change: default
     cluster: pre-prod-cluster
     environment: pre-prod
+    geo: uk
     tenant: tenant-a
   name: pre-prod-cluster-tenant-admin-rolebinding
   namespace: tenant-a
@@ -87,6 +90,7 @@ metadata:
   labels:
     cluster: pre-prod-cluster
     environment: pre-prod
+    geo: uk
     tenant: tenant-a
   name: pre-prod-cluster-repo-sync
   namespace: tenant-a
@@ -126,6 +130,7 @@ metadata:
   labels:
     cluster: pre-prod-cluster
     environment: pre-prod
+    geo: uk
     tenant: tenant-a
   name: pre-prod-cluster-default-deny-ingress
   namespace: tenant-a

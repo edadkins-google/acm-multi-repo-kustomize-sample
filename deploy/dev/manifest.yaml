@@ -7,6 +7,7 @@ metadata:
     changed: label for tenant-a only in the dev environment
     cluster: dev-cluster
     environment: dev
+    geo: uk
     tenant: tenant-a
   name: tenant-a
 ---
@@ -18,6 +19,7 @@ metadata:
   labels:
     cluster: dev-cluster
     environment: dev
+    geo: uk
     tenant: tenant-a
   name: tenant-admin
   namespace: tenant-a
@@ -38,6 +40,7 @@ metadata:
     change: default
     cluster: dev-cluster
     environment: dev
+    geo: uk
     tenant: tenant-a
   name: tenant-admin-rolebinding
   namespace: tenant-a
@@ -88,6 +91,7 @@ metadata:
   labels:
     cluster: dev-cluster
     environment: dev
+    geo: uk
     tenant: tenant-a
   name: repo-sync
   namespace: tenant-a
@@ -127,6 +131,7 @@ metadata:
   labels:
     cluster: dev-cluster
     environment: dev
+    geo: uk
     tenant: tenant-a
   name: default-deny-ingress
   namespace: tenant-a

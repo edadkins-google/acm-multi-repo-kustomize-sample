@@ -6,6 +6,7 @@ metadata:
   labels:
     cluster: prod-cluster-lon
     environment: prod
+    geo: uk
     tenant: tenant-a
   name: prod-lon-tenant-a
 ---
@@ -17,6 +18,7 @@ metadata:
   labels:
     cluster: prod-cluster-ny
     environment: prod
+    geo: uk
     tenant: tenant-a
   name: prod-ny-tenant-a
 ---
@@ -39,6 +41,7 @@ metadata:
   labels:
     cluster: prod-cluster-lon
     environment: prod
+    geo: uk
     tenant: tenant-a
   name: prod-lon-tenant-admin
   namespace: tenant-a
@@ -58,6 +61,7 @@ metadata:
   labels:
     cluster: prod-cluster-ny
     environment: prod
+    geo: uk
     tenant: tenant-a
   name: prod-ny-tenant-admin
   namespace: tenant-a
@@ -98,6 +102,7 @@ metadata:
     change: default
     cluster: prod-cluster-lon
     environment: prod
+    geo: uk
     tenant: tenant-a
   name: prod-lon-tenant-admin-rolebinding
   namespace: tenant-a
@@ -119,6 +124,7 @@ metadata:
     change: default
     cluster: prod-cluster-ny
     environment: prod
+    geo: uk
     tenant: tenant-a
   name: prod-ny-tenant-admin-rolebinding
   namespace: tenant-a
@@ -220,6 +226,7 @@ metadata:
   labels:
     cluster: prod-cluster-lon
     environment: prod
+    geo: uk
     tenant: tenant-a
   name: prod-lon-repo-sync
   namespace: tenant-a
@@ -238,6 +245,7 @@ metadata:
   labels:
     cluster: prod-cluster-ny
     environment: prod
+    geo: uk
     tenant: tenant-a
   name: prod-ny-repo-sync
   namespace: tenant-a
@@ -316,6 +324,7 @@ metadata:
   labels:
     cluster: prod-cluster-lon
     environment: prod
+    geo: uk
     tenant: tenant-a
   name: prod-lon-default-deny-ingress
   namespace: tenant-a
@@ -332,6 +341,7 @@ metadata:
   labels:
     cluster: prod-cluster-ny
     environment: prod
+    geo: uk
     tenant: tenant-a
   name: prod-ny-default-deny-ingress
   namespace: tenant-a
