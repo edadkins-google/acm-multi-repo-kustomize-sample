@@ -88,6 +88,38 @@ subjects:
   kind: Group
   name: tenant-b-admin@mydomain.com
 ---
+apiVersion: configsync.gke.io/v1beta1
+kind: RepoSync
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  labels:
+    geo: uk
+  name: repo-sync
+  namespace: tenant-a
+spec:
+  git:
+    auth: none
+    branch: dev
+    repo: https://github.com/ejmadkins/acm-multi-repo-tenant-a.git
+  sourceFormat: unstructured
+---
+apiVersion: configsync.gke.io/v1beta1
+kind: RepoSync
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  labels:
+    geo: uk
+  name: repo-sync
+  namespace: tenant-b
+spec:
+  git:
+    auth: none
+    branch: dev
+    repo: https://github.com/ejmadkins/acm-multi-repo-tenant-b.git
+  sourceFormat: unstructured
+---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sRequiredLabels
 metadata:

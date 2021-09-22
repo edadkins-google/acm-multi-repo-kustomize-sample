@@ -4,3 +4,12 @@ resources:
 
 commonAnnotations:
   configsync.gke.io/cluster-name-selector: pre-prod-cluster
+
+patches:
+- target:
+    kind: RepoSync
+    name: repo-sync
+  patch: |-
+    - op: replace
+      path: /spec/git/branch
+      value: pre-prod
