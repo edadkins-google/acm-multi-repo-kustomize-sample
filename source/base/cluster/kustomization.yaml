@@ -1,3 +1,2 @@
 resources:
 - policies/K8sRequiredLabels.yaml
-- agents/datadog.yaml

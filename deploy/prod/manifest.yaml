@@ -95,29 +95,6 @@ subjects:
   kind: Group
   name: tenant-b-admin@mydomain.com
 ---
-apiVersion: apps/v1
-kind: DaemonSet
-metadata:
-  labels:
-    environment: prod
-  name: datadog
-spec:
-  selector:
-    matchLabels:
-      app: datadog
-      environment: prod
-  template:
-    metadata:
-      labels:
-        app: datadog
-        environment: prod
-    spec:
-      containers:
-      - image: httpd
-        name: datadog
-        ports:
-        - containerPort: 80
----
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sRequiredLabels
 metadata:
