@@ -1,7 +1,7 @@
 namespace: tenant-c
 
 commonLabels:
-  tenant: tenant-c
+  geo: uk
 
 resources:
 - ../../base/namespace

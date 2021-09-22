@@ -1,4 +1,3 @@
-namePrefix: pre-prod-cluster-
 
 resources:
 - ../../tenants/tenant-a

@@ -6,8 +6,7 @@ metadata:
   labels:
     environment: prod
     geo: uk
-    tenant: tenant-a
-  name: prod-cluster-lon-tenant-a
+  name: tenant-a
 ---
 apiVersion: v1
 kind: Namespace
@@ -17,18 +16,7 @@ metadata:
   labels:
     environment: prod
     geo: uk
-    tenant: tenant-a
-  name: prod-cluster-ny-tenant-a
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations:
-    configsync.gke.io/cluster-name-selector: prod-cluster-ny
-  labels:
-    environment: prod
-    tenant: tenant-b
-  name: prod-cluster-ny-tenant-b
+  name: tenant-b
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -38,27 +26,7 @@ metadata:
   labels:
     environment: prod
     geo: uk
-    tenant: tenant-a
-  name: prod-cluster-lon-tenant-admin
-  namespace: tenant-a
-rules:
-- apiGroups:
-  - apps
-  resources:
-  - deployments
-  verbs:
-  - '*'
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  annotations:
-    configsync.gke.io/cluster-name-selector: prod-cluster-ny
-  labels:
-    environment: prod
-    geo: uk
-    tenant: tenant-a
-  name: prod-cluster-ny-tenant-admin
+  name: tenant-admin
   namespace: tenant-a
 rules:
 - apiGroups:
@@ -76,8 +44,8 @@ metadata:
   labels:
     changed: label for tenant-b across all environments
     environment: prod
-    tenant: tenant-b
-  name: prod-cluster-ny-tenant-admin
+    geo: uk
+  name: tenant-admin
   namespace: tenant-b
 rules:
 - apiGroups:
@@ -96,13 +64,12 @@ metadata:
     change: default
     environment: prod
     geo: uk
-    tenant: tenant-a
-  name: prod-cluster-lon-tenant-admin-rolebinding
+  name: tenant-admin-rolebinding
   namespace: tenant-a
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: prod-cluster-lon-tenant-admin
+  name: tenant-admin
 subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: Group
@@ -117,33 +84,12 @@ metadata:
     change: default
     environment: prod
     geo: uk
-    tenant: tenant-a
-  name: prod-cluster-ny-tenant-admin-rolebinding
-  namespace: tenant-a
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: prod-cluster-ny-tenant-admin
-subjects:
-- apiGroup: rbac.authorization.k8s.io
-  kind: Group
-  name: tenant-a-admin@mydomain.com
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  annotations:
-    configsync.gke.io/cluster-name-selector: prod-cluster-ny
-  labels:
-    change: default
-    environment: prod
-    tenant: tenant-b
-  name: prod-cluster-ny-tenant-admin-rolebinding
+  name: tenant-admin-rolebinding
   namespace: tenant-b
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: prod-cluster-ny-tenant-admin
+  name: tenant-admin
 subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: Group
@@ -197,8 +143,7 @@ metadata:
   labels:
     environment: prod
     geo: uk
-    tenant: tenant-a
-  name: prod-cluster-lon-default-deny-ingress
+  name: default-deny-ingress
   namespace: tenant-a
 spec:
   podSelector: {}
@@ -213,23 +158,7 @@ metadata:
   labels:
     environment: prod
     geo: uk
-    tenant: tenant-a
-  name: prod-cluster-ny-default-deny-ingress
-  namespace: tenant-a
-spec:
-  podSelector: {}
-  policyTypes:
-  - Ingress
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  annotations:
-    configsync.gke.io/cluster-name-selector: prod-cluster-ny
-  labels:
-    environment: prod
-    tenant: tenant-b
-  name: prod-cluster-ny-default-deny-ingress
+  name: default-deny-ingress
   namespace: tenant-b
 spec:
   podSelector: {}

@@ -1,7 +1,6 @@
 namespace: tenant-a
 
 commonLabels:
-  tenant: tenant-a
   geo: uk
 
 resources:
