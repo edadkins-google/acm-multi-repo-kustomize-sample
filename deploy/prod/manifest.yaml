@@ -42,7 +42,6 @@ metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
-    changed: label for tenant-b across all environments
     environment: prod
     geo: uk
   name: tenant-admin

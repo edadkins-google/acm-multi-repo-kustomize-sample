@@ -42,7 +42,6 @@ metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: dev-cluster
   labels:
-    changed: label for tenant-b across all environments
     environment: dev
     geo: uk
   name: tenant-admin
