@@ -4,7 +4,6 @@ metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: pre-prod-cluster
   labels:
-    environment: pre-prod
     geo: uk
   name: tenant-a
 ---
@@ -14,7 +13,6 @@ metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: pre-prod-cluster
   labels:
-    environment: pre-prod
     geo: uk
   name: tenant-admin
   namespace: tenant-a
@@ -33,7 +31,6 @@ metadata:
     configsync.gke.io/cluster-name-selector: pre-prod-cluster
   labels:
     change: default
-    environment: pre-prod
     geo: uk
   name: tenant-admin-rolebinding
   namespace: tenant-a
@@ -49,8 +46,8 @@ subjects:
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sRequiredLabels
 metadata:
-  labels:
-    environment: pre-prod
+  annotations:
+    configsync.gke.io/cluster-name-selector: pre-prod-cluster
   name: ns-must-have-geo
 spec:
   match:
@@ -69,7 +66,6 @@ metadata:
   annotations:
     configsync.gke.io/cluster-name-selector: pre-prod-cluster
   labels:
-    environment: pre-prod
     geo: uk
   name: default-deny-ingress
   namespace: tenant-a

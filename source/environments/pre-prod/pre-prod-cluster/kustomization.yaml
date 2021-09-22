@@ -1,6 +1,6 @@
-
 resources:
-- ../../tenants/tenant-a
+- ../../../base/cluster
+- ../../../tenants/tenant-a
 
 commonAnnotations:
   configsync.gke.io/cluster-name-selector: pre-prod-cluster

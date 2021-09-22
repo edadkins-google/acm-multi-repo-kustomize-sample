@@ -2,9 +2,8 @@ commonLabels:
   environment: prod
 
 resources:
-- ../../base/cluster
-- ../../clusters/prod-cluster-lon
-- ../../clusters/prod-cluster-ny
+- prod-cluster-lon
+- prod-cluster-ny
 
 patches:
 - target:

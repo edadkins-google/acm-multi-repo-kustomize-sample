@@ -2,8 +2,7 @@ commonLabels:
   environment: dev
 
 resources:
-- ../../base/cluster
-- ../../clusters/dev-cluster
+- dev-cluster
 
 patches:
 - target:

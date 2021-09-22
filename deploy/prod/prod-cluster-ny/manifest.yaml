@@ -2,9 +2,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   annotations:
-    configsync.gke.io/cluster-name-selector: dev-cluster
+    configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
-    environment: dev
     geo: uk
   name: tenant-a
 ---
@@ -12,9 +11,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   annotations:
-    configsync.gke.io/cluster-name-selector: dev-cluster
+    configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
-    environment: dev
     geo: uk
   name: tenant-b
 ---
@@ -22,9 +20,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   annotations:
-    configsync.gke.io/cluster-name-selector: dev-cluster
+    configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
-    environment: dev
     geo: uk
   name: tenant-admin
   namespace: tenant-a
@@ -40,9 +37,8 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   annotations:
-    configsync.gke.io/cluster-name-selector: dev-cluster
+    configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
-    environment: dev
     geo: uk
   name: tenant-admin
   namespace: tenant-b
@@ -58,10 +54,9 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   annotations:
-    configsync.gke.io/cluster-name-selector: dev-cluster
+    configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
     change: default
-    environment: dev
     geo: uk
   name: tenant-admin-rolebinding
   namespace: tenant-a
@@ -78,10 +73,9 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   annotations:
-    configsync.gke.io/cluster-name-selector: dev-cluster
+    configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
     change: default
-    environment: dev
     geo: uk
   name: tenant-admin-rolebinding
   namespace: tenant-b
@@ -97,8 +91,8 @@ subjects:
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sRequiredLabels
 metadata:
-  labels:
-    environment: dev
+  annotations:
+    configsync.gke.io/cluster-name-selector: prod-cluster-ny
   name: ns-must-have-geo
 spec:
   match:
@@ -115,9 +109,8 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   annotations:
-    configsync.gke.io/cluster-name-selector: dev-cluster
+    configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
-    environment: dev
     geo: uk
   name: default-deny-ingress
   namespace: tenant-a
@@ -130,9 +123,8 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   annotations:
-    configsync.gke.io/cluster-name-selector: dev-cluster
+    configsync.gke.io/cluster-name-selector: prod-cluster-ny
   labels:
-    environment: dev
     geo: uk
   name: default-deny-ingress
   namespace: tenant-b
