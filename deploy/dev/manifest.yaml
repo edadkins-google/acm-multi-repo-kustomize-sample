@@ -8,6 +8,16 @@ metadata:
     geo: uk
   name: tenant-a
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  labels:
+    environment: dev
+    geo: uk
+  name: tenant-b
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -18,6 +28,24 @@ metadata:
     geo: uk
   name: tenant-admin
   namespace: tenant-a
+rules:
+- apiGroups:
+  - apps
+  resources:
+  - deployments
+  verbs:
+  - '*'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  labels:
+    environment: dev
+    geo: uk
+  name: tenant-admin
+  namespace: tenant-b
 rules:
 - apiGroups:
   - apps
@@ -46,6 +74,26 @@ subjects:
   kind: Group
   name: tenant-a-admin@mydomain.com
 ---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  labels:
+    change: default
+    environment: dev
+    geo: uk
+  name: tenant-admin-rolebinding
+  namespace: tenant-b
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: tenant-admin
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: tenant-b-admin@mydomain.com
+---
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sRequiredLabels
 metadata:
@@ -73,6 +121,21 @@ metadata:
     geo: uk
   name: default-deny-ingress
   namespace: tenant-a
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  labels:
+    environment: dev
+    geo: uk
+  name: default-deny-ingress
+  namespace: tenant-b
 spec:
   podSelector: {}
   policyTypes:
