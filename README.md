@@ -12,11 +12,16 @@ The example Git repository contains three namespaces for different tenants, four
 ```
 ├── deploy
 │   ├── dev
-│   │   └── manifest.yaml
+│   │   └── dev-cluster
+│   │       └── manifest.yaml
 │   ├── pre-prod
-│   │   └── manifest.yaml
+│   │   └── pre-prod-cluster
+│   │       └── manifest.yaml
 │   └── prod
-│       └── manifest.yaml
+│       ├── prod-cluster-lon
+│       │   └── manifest.yaml
+│       └── prod-cluster-ny
+│           └── manifest.yaml
 ├── script
 │   └── render.sh
 └── source
@@ -34,31 +39,26 @@ The example Git repository contains three namespaces for different tenants, four
     │       ├── reposync.yaml
     │       ├── role.yaml
     │       └── rolebinding.yaml
-    ├── clusters
-    │   ├── dev-cluster
-    │   │   ├── kustomization.yaml
-    │   │   └── tenant-a
-    │   │       ├── namespace.yaml
-    │   │       └── networkpolicy.yaml
-    │   ├── pre-prod-cluster
-    │   │   └── kustomization.yaml
-    │   ├── prod-cluster-lon
-    │   │   └── kustomization.yaml
-    │   └── prod-cluster-ny
-    │       └── kustomization.yaml
     ├── environments
     │   ├── dev
+    │   │   ├── dev-cluster
+    │   │   │   └── kustomization.yaml
     │   │   └── kustomization.yaml
     │   ├── pre-prod
-    │   │   └── kustomization.yaml
+    │   │   ├── kustomization.yaml
+    │   │   └── pre-prod-cluster
+    │   │       └── kustomization.yaml
     │   └── prod
-    │       └── kustomization.yaml
+    │       ├── kustomization.yaml
+    │       ├── prod-cluster-lon
+    │       │   └── kustomization.yaml
+    │       └── prod-cluster-ny
+    │           └── kustomization.yaml
     └── tenants
         ├── tenant-a
         │   └── kustomization.yaml
         ├── tenant-b
-        │   ├── kustomization.yaml
-        │   └── role.yaml
+        │   └── kustomization.yaml
         └── tenant-c
             └── kustomization.yaml
 ```
@@ -71,7 +71,8 @@ $ git clone https://github.com/<YOUR_ORGANIZATION>/acm-multi-repo-kustomize-samp
 
 After making changes i.e. adding a new tenant or cluster, you should rebuild the kustomize output by running the `render.sh` script.
 ```
-$ ./scripts/render.sh
+$ cd scripts
+$ ./render.sh
 ```
 
 Then you can commit and push the update.
