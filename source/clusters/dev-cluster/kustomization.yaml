@@ -1,7 +1,6 @@
 
 resources:
 - ../../tenants/tenant-a
-- ../../tenants/tenant-b
 
 commonAnnotations:
   configsync.gke.io/cluster-name-selector: dev-cluster
