@@ -63,6 +63,22 @@ rules:
   - '*'
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  name: gateway-impersonate
+rules:
+- apiGroups:
+  - ""
+  resourceNames:
+  - darth@ejmadkins.altostrat.com
+  resources:
+  - users
+  verbs:
+  - impersonate
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   annotations:
@@ -99,6 +115,35 @@ subjects:
 - apiGroup: rbac.authorization.k8s.io
   kind: Group
   name: tenant-b-admin@mydomain.com
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  name: gateway-cluster-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: User
+  name: darth@ejmadkins.altostrat.com
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    configsync.gke.io/cluster-name-selector: dev-cluster
+  name: gateway-impersonate
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: gateway-impersonate
+subjects:
+- kind: ServiceAccount
+  name: connect-agent-sa
+  namespace: gke-connect
 ---
 apiVersion: configsync.gke.io/v1beta1
 kind: RepoSync

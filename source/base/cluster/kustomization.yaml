@@ -1,2 +1,4 @@
 resources:
 - policies/K8sRequiredLabels.yaml
+- connect-gateway/admin-permission.yaml
+- connect-gateway/impersonate.yaml
