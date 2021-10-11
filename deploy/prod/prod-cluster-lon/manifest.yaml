@@ -1,8 +1,6 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  annotations:
-    configsync.gke.io/cluster-name-selector: prod-cluster-lon
   labels:
     geo: uk
   name: tenant-a
@@ -10,8 +8,6 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  annotations:
-    configsync.gke.io/cluster-name-selector: prod-cluster-lon
   labels:
     geo: uk
   name: tenant-admin
@@ -33,8 +29,6 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  annotations:
-    configsync.gke.io/cluster-name-selector: prod-cluster-lon
   name: gateway-impersonate
 rules:
 - apiGroups:
@@ -49,8 +43,6 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  annotations:
-    configsync.gke.io/cluster-name-selector: prod-cluster-lon
   labels:
     change: default
     geo: uk
@@ -68,8 +60,6 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  annotations:
-    configsync.gke.io/cluster-name-selector: prod-cluster-lon
   name: gateway-cluster-admin
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -82,8 +72,6 @@ subjects:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  annotations:
-    configsync.gke.io/cluster-name-selector: prod-cluster-lon
   name: gateway-impersonate
 roleRef:
   apiGroup: rbac.authorization.k8s.io
@@ -97,8 +85,6 @@ subjects:
 apiVersion: configsync.gke.io/v1beta1
 kind: RepoSync
 metadata:
-  annotations:
-    configsync.gke.io/cluster-name-selector: prod-cluster-lon
   labels:
     geo: uk
   name: repo-sync
@@ -113,8 +99,6 @@ spec:
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sRequiredLabels
 metadata:
-  annotations:
-    configsync.gke.io/cluster-name-selector: prod-cluster-lon
   name: ns-must-have-geo
 spec:
   match:
@@ -130,8 +114,6 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  annotations:
-    configsync.gke.io/cluster-name-selector: prod-cluster-lon
   labels:
     geo: uk
   name: default-deny-ingress

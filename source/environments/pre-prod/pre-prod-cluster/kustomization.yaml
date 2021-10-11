@@ -2,9 +2,6 @@ resources:
 - ../../../base/cluster
 - ../../../tenants/tenant-a
 
-commonAnnotations:
-  configsync.gke.io/cluster-name-selector: pre-prod-cluster
-
 patches:
 - target:
     kind: RepoSync
