@@ -15,42 +15,32 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
+  creationTimestamp: null
   labels:
     geo: uk
-  name: tenant-admin
+  name: tenant-sync
   namespace: tenant-a
 rules:
 - apiGroups:
-  - apps
-  resources:
-  - deployments
-  verbs:
   - '*'
-- apiGroups:
-  - networking.k8s.io
   resources:
-  - networkpolicies
+  - '*'
   verbs:
   - '*'
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
+  creationTimestamp: null
   labels:
     geo: uk
-  name: tenant-admin
+  name: tenant-sync
   namespace: tenant-b
 rules:
 - apiGroups:
-  - apps
-  resources:
-  - deployments
-  verbs:
   - '*'
-- apiGroups:
-  - networking.k8s.io
   resources:
-  - networkpolicies
+  - '*'
   verbs:
   - '*'
 ---
@@ -72,35 +62,33 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   labels:
-    change: default
     geo: uk
-  name: tenant-admin-rolebinding
+  name: tenant-sync
   namespace: tenant-a
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: tenant-admin
+  name: tenant-sync
 subjects:
-- apiGroup: rbac.authorization.k8s.io
-  kind: Group
-  name: tenant-a-admin@mydomain.com
+- kind: ServiceAccount
+  name: ns-reconciler
+  namespace: config-management-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   labels:
-    change: default
     geo: uk
-  name: tenant-admin-rolebinding
+  name: tenant-sync
   namespace: tenant-b
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: tenant-admin
+  name: tenant-sync
 subjects:
-- apiGroup: rbac.authorization.k8s.io
-  kind: Group
-  name: tenant-b-admin@mydomain.com
+- kind: ServiceAccount
+  name: ns-reconciler
+  namespace: config-management-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -169,6 +157,14 @@ spec:
   parameters:
     labels:
     - key: geo
+---
+apiVersion: core.cnrm.cloud.google.com/v1beta1
+kind: ConfigConnector
+metadata:
+  name: configconnector.core.cnrm.cloud.google.com
+spec:
+  googleServiceAccount: cnrmsadev-cluster@ejmadkins-anthos-demo.iam.gserviceaccount.com
+  mode: cluster
 ---
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
