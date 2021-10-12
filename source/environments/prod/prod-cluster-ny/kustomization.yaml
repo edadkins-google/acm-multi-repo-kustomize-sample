@@ -11,3 +11,10 @@ patches:
     - op: replace
       path: /spec/git/branch
       value: prod
+- target:
+    kind: ConfigConnector
+    name: configconnector.core.cnrm.cloud.google.com
+  patch: |-
+    - op: replace
+      path: /spec/googleServiceAccount
+      value: cnrmsaprod-cluster-ny@ejmadkins-anthos-demo.iam.gserviceaccount.com

@@ -13,7 +13,7 @@ patches:
   patch: |-
     - op: replace
       path: /subjects/0/name
-      value: tenant-c-admin@mydomain.com
+      value: ns-reconciler-tenant-c
 - target:
     kind: Namespace
     name: default
