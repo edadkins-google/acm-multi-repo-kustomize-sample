@@ -9,7 +9,7 @@ resources:
 patches:
 - target:
     kind: RoleBinding
-    name: tenant-admin-rolebinding
+    name: tenant-sync
   patch: |-
     - op: replace
       path: /subjects/0/name

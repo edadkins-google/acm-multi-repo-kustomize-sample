@@ -71,7 +71,7 @@ roleRef:
   name: tenant-sync
 subjects:
 - kind: ServiceAccount
-  name: ns-reconciler
+  name: ns-reconciler-tenant-a
   namespace: config-management-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -87,7 +87,7 @@ roleRef:
   name: tenant-sync
 subjects:
 - kind: ServiceAccount
-  name: ns-reconciler
+  name: ns-reconciler-tenant-b
   namespace: config-management-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
