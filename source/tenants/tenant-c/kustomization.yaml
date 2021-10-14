@@ -21,6 +21,9 @@ patches:
     - op: replace
       path: /metadata/name
       value: tenant-c
+    - op: replace
+      path: /metadata/annotations/cnrm.cloud.google.com~1project-id
+      value: $(project)
 - target:
     kind: RepoSync
     name: repo-sync

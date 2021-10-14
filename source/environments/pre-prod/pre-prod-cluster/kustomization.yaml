@@ -10,3 +10,10 @@ patches:
     - op: replace
       path: /spec/git/branch
       value: pre-prod
+- target:
+    kind: ConfigConnector
+    name: configconnector.core.cnrm.cloud.google.com
+  patch: |-
+    - op: replace
+      path: /spec/googleServiceAccount
+      value: cnrmpre-prod-cluster@ejmadkins-anthos-demo.iam.gserviceaccount.com
