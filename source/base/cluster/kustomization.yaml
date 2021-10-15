@@ -1,5 +1,6 @@
 resources:
 - policies/K8sRequiredLabels.yaml
+- policies/K8sPSPCapabilities.yaml
 - connect-gateway/admin-permission.yaml
 - connect-gateway/impersonate.yaml
 - kcc/configconnector.yaml

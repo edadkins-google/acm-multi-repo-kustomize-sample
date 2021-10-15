@@ -94,6 +94,23 @@ spec:
   sourceFormat: unstructured
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sPSPCapabilities
+metadata:
+  name: forbid-cap-net-raw
+spec:
+  match:
+    kinds:
+    - apiGroups:
+      - ""
+      kinds:
+      - Pod
+    namespaces:
+    - default
+  parameters:
+    requiredDropCapabilities:
+    - NET_RAW
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sRequiredLabels
 metadata:
   name: ns-must-have-geo

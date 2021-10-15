@@ -1,0 +1,15 @@
+# Dropping CAP_NET_RAW with ACM Policy Controller
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind:  K8sPSPCapabilities
+metadata:
+  name: forbid-cap-net-raw
+spec:
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+    namespaces:
+      - default
+  parameters:
+    requiredDropCapabilities:
+      - "NET_RAW"
