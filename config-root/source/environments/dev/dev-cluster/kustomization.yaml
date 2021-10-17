@@ -1,5 +1,6 @@
 resources:
 - ../../../base/cluster
+- ../../../base/cluster/kcc
 - ../../../tenants/tenant-a
 - ../../../tenants/tenant-b
 

@@ -3,4 +3,3 @@ resources:
 - policies/K8sPSPCapabilities.yaml
 - connect-gateway/admin-permission.yaml
 - connect-gateway/impersonate.yaml
-- kcc/configconnector.yaml

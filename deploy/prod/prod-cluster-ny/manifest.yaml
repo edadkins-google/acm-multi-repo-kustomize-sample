@@ -181,14 +181,6 @@ spec:
     labels:
     - key: geo
 ---
-apiVersion: core.cnrm.cloud.google.com/v1beta1
-kind: ConfigConnector
-metadata:
-  name: configconnector.core.cnrm.cloud.google.com
-spec:
-  googleServiceAccount: cnrmsaprod-cluster-ny@ejmadkins-anthos-demo.iam.gserviceaccount.com
-  mode: cluster
----
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
