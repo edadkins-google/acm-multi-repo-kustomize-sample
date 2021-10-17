@@ -18,6 +18,16 @@ metadata:
     test: replace
   name: tenant-b
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    cnrm.cloud.google.com/project-id: ejmadkins-anthos-demo
+  labels:
+    geo: uk
+    test: replace
+  name: tenant-c
+---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -42,6 +52,22 @@ metadata:
     geo: uk
   name: tenant-sync
   namespace: tenant-b
+rules:
+- apiGroups:
+  - '*'
+  resources:
+  - '*'
+  verbs:
+  - '*'
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  creationTimestamp: null
+  labels:
+    geo: uk
+  name: tenant-sync
+  namespace: tenant-c
 rules:
 - apiGroups:
   - '*'
@@ -97,6 +123,22 @@ subjects:
   namespace: config-management-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  labels:
+    geo: uk
+  name: tenant-sync
+  namespace: tenant-c
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: tenant-sync
+subjects:
+- kind: ServiceAccount
+  name: ns-reconciler-tenant-c
+  namespace: config-management-system
+---
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: gateway-cluster-admin
@@ -147,6 +189,20 @@ spec:
     auth: none
     branch: dev
     repo: https://github.com/ejmadkins/acm-multi-repo-tenant-b.git
+  sourceFormat: unstructured
+---
+apiVersion: configsync.gke.io/v1beta1
+kind: RepoSync
+metadata:
+  labels:
+    geo: uk
+  name: repo-sync
+  namespace: tenant-c
+spec:
+  git:
+    auth: none
+    branch: dev
+    repo: https://github.com/ejmadkins/acm-multi-repo-tenant-c.git
   sourceFormat: unstructured
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
@@ -208,6 +264,18 @@ metadata:
     geo: uk
   name: default-deny-ingress
   namespace: tenant-b
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  labels:
+    geo: uk
+  name: default-deny-ingress
+  namespace: tenant-c
 spec:
   podSelector: {}
   policyTypes:
