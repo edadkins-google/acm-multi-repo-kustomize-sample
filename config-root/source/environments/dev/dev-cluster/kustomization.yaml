@@ -2,7 +2,6 @@ resources:
 - ../../../base/cluster
 - ../../../tenants/tenant-a
 - ../../../tenants/tenant-b
-- ../../../tenants/tenant-c
 
 patches:
 - target:
