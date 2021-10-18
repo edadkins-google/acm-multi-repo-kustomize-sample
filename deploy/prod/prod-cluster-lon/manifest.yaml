@@ -132,15 +132,3 @@ metadata:
 spec:
   googleServiceAccount: cnrmsaprod-cluster-lon@ejmadkins-anthos-demo.iam.gserviceaccount.com
   mode: cluster
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  labels:
-    geo: uk
-  name: default-deny-ingress
-  namespace: tenant-a
-spec:
-  podSelector: {}
-  policyTypes:
-  - Ingress
