@@ -31,10 +31,11 @@ update_project () {
 
 # provision clusters
 create_cluster () {
+  update_project
   for cluster in dev-cluster pre-prod-cluster prod-cluster-lon
   do
     terraform -chdir=clusters/${cluster} init
-    terraform -chdir=clusters/${cluster} apply -var "project=${project}" -auto-approve &
+    terraform -chdir=clusters/${cluster} apply -var "project=${project}" -auto-approve
     gcloud container clusters get-credentials ${cluster} --region europe-west2 --project ${project}
   done
 }
@@ -55,4 +56,3 @@ do
         d) destroy_cluster ;;
     esac
 done
-
