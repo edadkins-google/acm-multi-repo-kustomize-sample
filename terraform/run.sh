@@ -6,23 +6,25 @@ echo Enter Project Name:
 read project
 
 update_project () {
-  for dir in ../config-root/source/environments/*/
+  for env_dir in ../config-root/source/environments/*/
   do
-      dir=${dir%*/}
-      for cluster in ../config-root/source/environments/"${dir##*/}"/*/
+      env_dir=${env_dir%*/}
+      for cluster in ../config-root/source/environments/"${env_dir##*/}"/*/
       do
         cluster=${cluster%*/}
-        sed -i "s/${project}/PROJECT-INSERT/g" ../config-root/source/environments/"${dir##*/}"/"${cluster##*/}"/kustomization.yaml
+        echo ../config-root/source/environments/"${env_dir##*/}"/"${cluster##*/}"/kustomization.yaml
+        sed -i "s/PROJECT-INSERT/${project}/g" ../config-root/source/environments/"${env_dir##*/}"/"${cluster##*/}"/kustomization.yaml
       done
   done
 
-  for dir in ../config-root/source/tenants/*/
+  for tenant_dir in ../config-root/source/tenants/*/
   do
-      dir=${dir%*/}
-      for tenant in ../config-root/source/tenants/"${dir##*/}"/*/
+      tenant_dir=${tenant_dir%*/}
+      for tenant in ../config-root/source/tenants/"${tenant_dir##*/}"/
       do
         tenant=${tenant%*/}
-        sed -i "s/${project}/PROJECT-INSERT/g" ../config-root/source/environments/"${dir##*/}"/"${tenant##*/}"/kustomization.yaml
+        echo "${tenant##/}"/kustomization.yaml
+        sed -i "s/PROJECT-INSERT/${project}/g" "${tenant##/}"/kustomization.yaml
       done
   done
 }
