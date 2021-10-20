@@ -1,0 +1,20 @@
+resources:
+- ../../../base/cluster
+- ../../../base/cluster/kcc
+- ../../../tenants/tenant-a
+
+patches:
+- target:
+    kind: RepoSync
+    name: repo-sync
+  patch: |-
+    - op: replace
+      path: /spec/git/branch
+      value: preprod
+- target:
+    kind: ConfigConnector
+    name: configconnector.core.cnrm.cloud.google.com
+  patch: |-
+    - op: replace
+      path: /spec/googleServiceAccount
+      value: cnrmsa-preprod-cluster@PROJECT-INSERT.iam.gserviceaccount.com
