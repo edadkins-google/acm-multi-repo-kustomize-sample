@@ -47,6 +47,7 @@ create_cluster () {
 
 # delete clusters
 destroy_cluster () {
+  get_params
   for cluster in dev-cluster pre-prod-cluster prod-cluster-lon
   do
     terraform -chdir=clusters/${cluster} init
