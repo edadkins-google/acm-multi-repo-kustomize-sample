@@ -1,6 +1,6 @@
 # acm-multi-repo-kustomize-sample
 
-Use this repo to demo the following:
+Full featured Anthos Config Management demo with the following functionality:
 
 1. Provision three GKE clusters and enable ACM via the Hub Feature API using Terraform
 2. Hydrate manifests from a set of Dry configs using Kustomize undertaken Platform Engineering teams (RootSync)
