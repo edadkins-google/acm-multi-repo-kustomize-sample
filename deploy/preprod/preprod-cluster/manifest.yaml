@@ -8,16 +8,6 @@ metadata:
     test: replace
   name: tenant-a
 ---
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations:
-    cnrm.cloud.google.com/project-id: PROJECT-INSERT
-  labels:
-    geo: uk
-    test: replace
-  name: tenant-b
----
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
@@ -26,22 +16,6 @@ metadata:
     geo: uk
   name: tenant-sync
   namespace: tenant-a
-rules:
-- apiGroups:
-  - '*'
-  resources:
-  - '*'
-  verbs:
-  - '*'
----
-apiVersion: rbac.authorization.k8s.io/v1
-kind: Role
-metadata:
-  creationTimestamp: null
-  labels:
-    geo: uk
-  name: tenant-sync
-  namespace: tenant-b
 rules:
 - apiGroups:
   - '*'
@@ -81,22 +55,6 @@ subjects:
   namespace: config-management-system
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  labels:
-    geo: uk
-  name: tenant-sync
-  namespace: tenant-b
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: tenant-sync
-subjects:
-- kind: ServiceAccount
-  name: ns-reconciler-tenant-b
-  namespace: config-management-system
----
-apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: gateway-cluster-admin
@@ -131,22 +89,8 @@ metadata:
 spec:
   git:
     auth: none
-    branch: prod
+    branch: preprod
     repo: https://github.com/ejmadkins/acm-multi-repo-tenant-a.git
-  sourceFormat: unstructured
----
-apiVersion: configsync.gke.io/v1beta1
-kind: RepoSync
-metadata:
-  labels:
-    geo: uk
-  name: repo-sync
-  namespace: tenant-b
-spec:
-  git:
-    auth: none
-    branch: prod
-    repo: https://github.com/ejmadkins/acm-multi-repo-tenant-b.git
   sourceFormat: unstructured
 ---
 apiVersion: constraints.gatekeeper.sh/v1beta1
@@ -180,3 +124,11 @@ spec:
   parameters:
     labels:
     - key: geo
+---
+apiVersion: core.cnrm.cloud.google.com/v1beta1
+kind: ConfigConnector
+metadata:
+  name: configconnector.core.cnrm.cloud.google.com
+spec:
+  googleServiceAccount: cnrmsa-preprod-cluster@PROJECT-INSERT.iam.gserviceaccount.com
+  mode: cluster
