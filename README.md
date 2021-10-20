@@ -1,5 +1,13 @@
 # acm-multi-repo-kustomize-sample
 
+Use this repo to demo the following:
+
+1. Provision three GKE clusters and enable ACM via the Hub Feature API using Terraform
+2. Hydrate manifests from a set of Dry configs using Kustomize undertaken Platform Engineering teams (RootSync)
+3. Each tenant can deploy to clusters using their own repository, typically this would be an App team (RepoSync)
+4. Tenants can provision their application dependant GCP Services using a KRM approach with the Kubernetes Config Connector
+5. Ensure Kubernetes resources adhere to a set of policy contracts using the Policy Controller
+
 ## Before you begin
 This section describes prerequisites you must meet before this tutorial.
 - `terraform` is installed on your machine.
