@@ -22,8 +22,8 @@ module "gke" {
   region             = var.region
   zones              = [var.zone]
   initial_node_count = 8
-  network            = "default"
-  subnetwork         = "default"
+  network            = "gke-vpc"
+  subnetwork         = "gke-vpc"
   ip_range_pods      = ""
   ip_range_services  = ""
   config_connector   = true
