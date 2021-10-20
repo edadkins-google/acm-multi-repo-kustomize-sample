@@ -9,6 +9,7 @@ get_params () {
   read git_repo
 }
 
+# update project
 update_project () {
   for env_dir in ../config-root/source/environments/*/
   do
@@ -33,11 +34,18 @@ update_project () {
   done
 }
 
+# enable ACM as a hub feature
+enable_acm () {
+  terraform -chdir=global init
+  terraform -chdir=global apply -var "project=${project}" -auto-approve
+}
+
 # provision clusters
 create_cluster () {
   get_params
   update_project
-  for cluster in dev-cluster pre-prod-cluster prod-cluster-lon
+  enable_acm
+  for cluster in dev-cluster preprod-cluster prod-cluster-lon
   do
     terraform -chdir=clusters/${cluster} init
     terraform -chdir=clusters/${cluster} apply -var "project=${project}" -var "sync_repo=${git_repo}" -auto-approve
@@ -48,10 +56,10 @@ create_cluster () {
 # delete clusters
 destroy_cluster () {
   get_params
-  for cluster in dev-cluster pre-prod-cluster prod-cluster-lon
+  for cluster in dev-cluster preprod-cluster prod-cluster-lon
   do
     terraform -chdir=clusters/${cluster} init
-    terraform -chdir=clusters/${cluster} destroy  -var "project=${project}" -auto-approve
+    terraform -chdir=clusters/${cluster} destroy  -var "project=${project}" -var "sync_repo=${git_repo}" -auto-approve
   done
 }
 
