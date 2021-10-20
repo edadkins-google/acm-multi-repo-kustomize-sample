@@ -2,8 +2,12 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-echo Enter Project Name:
-read project
+get_params () {
+  echo Enter Project Name:
+  read project
+  echo Enter Git Repo URL:
+  read git_repo
+}
 
 update_project () {
   for env_dir in ../config-root/source/environments/*/
@@ -31,11 +35,12 @@ update_project () {
 
 # provision clusters
 create_cluster () {
+  get_params
   update_project
   for cluster in dev-cluster pre-prod-cluster prod-cluster-lon
   do
     terraform -chdir=clusters/${cluster} init
-    terraform -chdir=clusters/${cluster} apply -var "project=${project}" -auto-approve
+    terraform -chdir=clusters/${cluster} apply -var "project=${project}" -var "sync_repo=${git_repo}" -auto-approve
     gcloud container clusters get-credentials ${cluster} --region europe-west2 --project ${project}
   done
 }
