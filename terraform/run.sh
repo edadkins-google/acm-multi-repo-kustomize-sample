@@ -3,7 +3,7 @@ set -o nounset
 set -o pipefail
 
 get_params () {
-  echo Enter Project Name:
+  echo Enter Project ID:
   read project
   echo Enter Git Repo URL:
   read git_repo
