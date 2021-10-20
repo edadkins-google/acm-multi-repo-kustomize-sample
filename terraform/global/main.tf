@@ -15,6 +15,12 @@ module "enabled_google_apis" {
   ]
 }
 
+resource "google_compute_network" "vpc_network" {
+  project                 = var.project
+  name                    = "gke-vpc"
+  auto_create_subnetworks = true
+}
+
 resource "google_project_organization_policy" "os_login" {
   project = var.project
   constraint = "compute.requireOsLogin"
@@ -22,7 +28,6 @@ resource "google_project_organization_policy" "os_login" {
   restore_policy {
     default = true
   }
-
 }
 
 resource "google_project_organization_policy" "shielded_vm" {
@@ -32,7 +37,6 @@ resource "google_project_organization_policy" "shielded_vm" {
   restore_policy {
     default = true
   }
-  
 }
 
 resource "google_project_organization_policy" "vm_external_ip_access" {
@@ -42,7 +46,6 @@ resource "google_project_organization_policy" "vm_external_ip_access" {
   restore_policy {
     default = true
   }
-  
 }
 
 resource "google_project_organization_policy" "ip_forward" {
@@ -52,7 +55,6 @@ resource "google_project_organization_policy" "ip_forward" {
   restore_policy {
     default = true
   }
-  
 }
 
 resource "google_project_organization_policy" "bucket_level_access" {
@@ -62,7 +64,6 @@ resource "google_project_organization_policy" "bucket_level_access" {
   restore_policy {
     default = true
   } 
-
 }
 
 resource "time_sleep" "wait_30_seconds" {
