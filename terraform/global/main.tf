@@ -15,12 +15,6 @@ module "enabled_google_apis" {
   ]
 }
 
-resource "google_compute_network" "vpc_network" {
-  project                 = var.project
-  name                    = "gke-vpc"
-  auto_create_subnetworks = true
-}
-
 resource "google_project_organization_policy" "os_login" {
   project = var.project
   constraint = "compute.requireOsLogin"
@@ -69,6 +63,13 @@ resource "google_project_organization_policy" "bucket_level_access" {
 resource "time_sleep" "wait_30_seconds" {
   depends_on = [module.enabled_google_apis]
   create_duration = "30s"
+}
+
+resource "google_compute_network" "vpc_network" {
+  project                 = var.project
+  name                    = "gke-vpc"
+  auto_create_subnetworks = true
+  depends_on = [time_sleep.wait_30_seconds]
 }
 
 resource "google_gke_hub_feature" "feature" {
