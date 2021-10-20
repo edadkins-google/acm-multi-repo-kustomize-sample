@@ -1,6 +1,6 @@
-# acm-multi-repo-kustomize-sample
+# Configuration and Policy as Data with Anthos Config Management
 
-Full featured Anthos Config Management demo with the following functionality:
+Anthos Config Management demo with the following functionality:
 
 1. Provision three GKE clusters and enable ACM via the Hub Feature API using Terraform
 2. Hydrate manifests from a set of Dry configs using Kustomize undertaken Platform Engineering teams (RootSync)
@@ -8,14 +8,16 @@ Full featured Anthos Config Management demo with the following functionality:
 4. Tenants can provision their application dependant GCP Services using a KRM approach with the Kubernetes Config Connector
 5. Ensure Kubernetes resources adhere to a set of policy contracts using the Policy Controller
 
-## Before you begin
+## Getting Started
+
+### Prerequisites/Requirements
 This section describes prerequisites you must meet before this tutorial.
 - `terraform` is installed on your machine.
 - `git` is installed on your machine.
 - `kustomize` is installed in your local machine. If not, you can install it by `gcloud components install kustomize`.
 
-## Get the example configuration
-The example Git repository contains three namespaces for different tenants, four clusters across three different environments. The repository contains the following directories and files.
+### Get the example configuration
+The example Git repository contains three namespaces for different tenants, three clusters across three different environments. The repository contains the following directories and files.
 ```
 └── source
     ├── base
@@ -65,12 +67,12 @@ Fork the example repository into your organization and clone the forked repo loc
 $ git clone https://github.com/<YOUR_ORGANIZATION>/acm-multi-repo-kustomize-sample.git configuration
 ```
 
-## Provision GCP services
+### Provision GCP services
 
 Run the `run.sh` helper script with the `-c` flag to provision the following services in your GCP project:
-* Three GKE clusters (dev-cluster, preprod-cluster, prod-cluster-lon)
-* Register the clusters to the GKE Hub
-* Enable and configure ACM for the clusters
+- Three GKE clusters (dev-cluster, preprod-cluster, prod-cluster-lon)
+- Register the clusters to the GKE Hub
+- Enable and configure ACM for the clusters
 
 ```
 $ cd terraform
@@ -81,7 +83,7 @@ You'll be prompted to enter your GCP Project Name and your forked Git URL i.e. `
 
 The provisioning should take <30 mins, once complete, there will be three GKE clusters, with ACM deployed and successfully synced to your Git repo.
 
-## Make changes to your Cluster's configuration
+### Make changes to your Cluster's configuration
 
 After making changes i.e. adding a new tenant or resource, you should rebuild the kustomize output by running the `render.sh` script.
 ```
@@ -97,7 +99,7 @@ $ git commit -m 'update configuration'
 $ git push origin main
 ```
 
-## Synchronise resources from a Tenants repository
+### Synchronise resources from a Tenants repository
 
 Tenant A's repository has already been provisioned for you with a few example resources in the dev branch.  We can verify that Tenant A's various resources have been synchronised to the cluster successfully.
 
@@ -107,7 +109,7 @@ $ kubectl get role,rolebinding,storagebucket,networkpolicy -n tenant-a
 
 For more advanced users, update the tenant's Kustomize file to point to your own tenant repo and sync your own resources.
 
-## Synchronise resources from a Tenants repository
+### Synchronise resources from a Tenants repository
 
 Tenant A's repository includes a Customer Resource for Google Cloud Storage that the Kubernetes Config Connector will use to provision a new bucket.  Verify that the `StorageBucket` Custom Resource has synced successfully to the cluster.
 
