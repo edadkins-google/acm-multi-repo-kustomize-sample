@@ -101,7 +101,7 @@ $ git push origin main
 
 ### Synchronise resources from a Tenants repository
 
-Tenant A's repository has already been provisioned for you with a few example resources in the dev branch.  We can verify that Tenant A's various resources have been synchronised to the cluster successfully.
+[Tenant A's repository](https://github.com/ejmadkins/acm-multi-repo-tenant-a) has already been provisioned for you with a few example resources in the dev branch.  We can verify that Tenant A's various resources have been synchronised to the cluster successfully.
 
 ```
 $ kubectl get role,rolebinding,storagebucket,networkpolicy -n tenant-a
