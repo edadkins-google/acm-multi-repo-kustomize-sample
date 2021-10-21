@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: out-of-policy
+  name: out-of-policy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: out-of-policy
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: out-of-policy
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        securityContext:
+          capabilities:
+            drop:
+              - NET_RAW
+        resources: {}
+status: {}
