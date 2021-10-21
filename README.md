@@ -19,46 +19,46 @@ This section describes prerequisites you must meet before this tutorial.
 ### Get the example configuration
 The example Git repository contains three namespaces for different tenants, three clusters across three different environments. The repository contains the following directories and files.
 ```
-└── source
-    ├── base
-    │   ├── cluster
-    │   │   ├── agents
-    │   │   │   └── datadog.yaml
-    │   │   ├── connect-gateway
-    │   │   │   ├── admin-permission.yaml
-    │   │   │   └── impersonate.yaml
-    │   │   ├── kcc
-    │   │   │   ├── configconnector.yaml
-    │   │   │   └── kustomization.yaml
-    │   │   ├── kustomization.yaml
-    │   │   └── policies
-    │   │       ├── K8sPSPCapabilities.yaml
-    │   │       └── K8sRequiredLabels.yaml
-    │   └── namespace
-    │       ├── kustomization.yaml
-    │       ├── namespace.yaml
-    │       ├── reposync.yaml
-    │       ├── role.yaml
-    │       └── rolebinding.yaml
-    ├── environments
-    │   ├── dev
-    │   │   └── dev-cluster
-    │   │       └── kustomization.yaml
-    │   ├── pre-prod
-    │   │   └── pre-prod-cluster
-    │   │       └── kustomization.yaml
-    │   └── prod
-    │       ├── prod-cluster-lon
-    │       │   └── kustomization.yaml
-    │       └── prod-cluster-ny
-    │           └── kustomization.yaml
-    └── tenants
-        ├── tenant-a
-        │   └── kustomization.yaml
-        ├── tenant-b
-        │   └── kustomization.yaml
-        └── tenant-c
-            └── kustomization.yaml
+config-root
+├── base
+│   ├── cluster
+│   │   ├── agents
+│   │   │   └── datadog.yaml
+│   │   ├── connect-gateway
+│   │   │   ├── admin-permission.yaml
+│   │   │   └── impersonate.yaml
+│   │   ├── kcc
+│   │   │   ├── configconnector.yaml
+│   │   │   └── kustomization.yaml
+│   │   ├── kustomization.yaml
+│   │   └── policies
+│   │       ├── K8sPSPCapabilities.yaml
+│   │       └── K8sRequiredLabels.yaml
+│   └── namespace
+│       ├── kustomization.yaml
+│       ├── namespace.yaml
+│       ├── reposync.yaml
+│       ├── role.yaml
+│       └── rolebinding.yaml
+├── environments
+│   ├── dev
+│   │   └── dev-cluster
+│   │       └── kustomization.yaml
+│   ├── preprod
+│   │   └── preprod-cluster
+│   │       └── kustomization.yaml
+│   └── prod
+│       ├── prod-cluster-lon
+│       │   └── kustomization.yaml
+│       └── prod-cluster-ny
+│           └── kustomization.yaml
+└── tenants
+    ├── tenant-a
+    │   └── kustomization.yaml
+    ├── tenant-b
+    │   └── kustomization.yaml
+    └── tenant-c
+        └── kustomization.yaml
 ```
 
 Fork the example repository into your organization and clone the forked repo locally.
