@@ -111,7 +111,7 @@ For more advanced users, update the tenant's Kustomize file to point to your own
 
 ### Synchronise resources from a Tenants repository
 
-Tenant A's repository includes a Customer Resource for Google Cloud Storage that the Kubernetes Config Connector will use to provision a new bucket.  Verify that the `StorageBucket` Custom Resource has synced successfully to the cluster.
+Tenant A's repository includes a Custom Resource for Google Cloud Storage that the Kubernetes Config Connector will use to provision a new bucket.  Verify that the `StorageBucket` Custom Resource has synced successfully to the cluster.
 
 ```
 $ kubectl get storagebucket -n tenant-a
