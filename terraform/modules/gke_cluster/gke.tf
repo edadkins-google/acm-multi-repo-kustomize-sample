@@ -40,5 +40,5 @@ module "wi" {
   annotate_k8s_sa     = false
   namespace           = "cnrm-system"
   project_id          = var.project
-  roles               = ["roles/owner"]
+  roles               = ["roles/storage.admin"]
 }

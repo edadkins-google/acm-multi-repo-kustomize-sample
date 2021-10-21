@@ -18,7 +18,6 @@ update_project () {
       for cluster in ../config-root/environments/"${env_dir##*/}"/*/
       do
         cluster=${cluster%*/}
-        echo ../config-root/environments/"${env_dir##*/}"/"${cluster##*/}"/kustomization.yaml
         sed -i "s/PROJECT-INSERT/${project}/g" ../config-root/environments/"${env_dir##*/}"/"${cluster##*/}"/kustomization.yaml
       done
   done
@@ -29,7 +28,6 @@ update_project () {
       for tenant in ../config-root/tenants/"${tenant_dir##*/}"/
       do
         tenant=${tenant%*/}
-        echo "${tenant##/}"/kustomization.yaml
         sed -i "s/PROJECT-INSERT/${project}/g" "${tenant##/}"/kustomization.yaml
       done
   done
