@@ -69,7 +69,7 @@ $ git clone https://github.com/<YOUR_ORGANIZATION>/acm-multi-repo-kustomize-samp
 
 ### Provision GCP services
 
-Run the `run.sh` helper script with the `-c` flag to provision the following services in your GCP project:
+Run the `provision.sh` helper script with the `-c` flag to provision the following services in your GCP project:
 - Three GKE clusters (dev-cluster, preprod-cluster, prod-cluster-lon)
 - Register the clusters to the GKE Hub
 - Enable and configure ACM for the clusters
@@ -79,22 +79,21 @@ $ cd scripts
 $ ./provision.sh -c
 ```
 
-You'll be prompted to enter your GCP Project Name and your forked Git URL i.e. `https://github.com/<YOUR_ORGANIZATION>/acm-multi-repo-kustomize-sample.git`.
+You'll be prompted to enter your GCP Project Id and your forked Git URL i.e. `https://github.com/<YOUR_ORGANIZATION>/acm-multi-repo-kustomize-sample.git`.
 
 The provisioning should take <30 mins, once complete, there will be three GKE clusters, with ACM deployed and successfully synced to your Git repo.
 
-Once completed, render your manifests and commit the updates for your repo, this ensures your Project ID is updated in the manifests for Config Connector to work correctly. 
+Once completed, render your manifests and commit the updates to your repo, this ensures your Project ID is updated in the manifests for the Config Connector to work correctly. 
 
 ```
 $ ./render.sh
-$ git add ../config-root
-$ git commit -m 'update configuration'
+$ git commit -am 'update configuration'
 $ git push origin main
 ```
 
 ### Make changes to your Cluster's configuration
 
-After making changes i.e. adding a new tenant or resource, you should rebuild the kustomize output by running the `render.sh` script.
+After making changes i.e. adding a new tenant or resource, you should hyrdrate your manifests by running the `render.sh` script.
 ```
 $ ./render.sh
 ```
@@ -102,8 +101,7 @@ $ ./render.sh
 Then you can commit and push the update.
 
 ```
-$ git add .
-$ git commit -m 'update configuration'
+$ git commit -am 'update configuration'
 $ git push origin main
 ```
 
@@ -126,6 +124,16 @@ $ kubectl get storagebucket -n tenant-a
 ```
 
 Check out the Google Cloud Storage section of the GCP console to verify that the bucket has been created.
+
+### Test policy contracts
+
+The `policy-example` contains two manifests (`out-of-policy.yaml` and `in-policy.yaml`), execute the following and verify in the Workloads section of the GKE dashboard that the Pod violates a policy constraint.
+
+```
+$ kubectl apply -f out-of-policy.yaml
+```
+
+To fix this, apply the `in-policy.yaml` manifest.
 
 ## Expanding this demo
 
