@@ -125,7 +125,7 @@ Check out the Google Cloud Storage section of the GCP console to verify that the
 
 ### Test policy contracts
 
-The `policy-example` contains two manifests (`out-of-policy.yaml` and `in-policy.yaml`), execute the following and verify in the Workloads section of the GKE dashboard that the Pod violates a policy constraint.
+The `policy-example` directory contains two manifests (`out-of-policy.yaml` and `in-policy.yaml`), execute the following and verify in the Workloads section of the GKE dashboard that the Pod violates a policy constraint.
 
 ```
 $ kubectl apply -f out-of-policy.yaml
