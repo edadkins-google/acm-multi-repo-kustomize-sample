@@ -1,6 +1,6 @@
 # Configuration and Policy as Data with Anthos Config Management
 
-Anthos Config Management demo with the following functionality:
+[Anthos Config Management](https://cloud.google.com/anthos/config-management) demo with the following functionality:
 
 1. Provision three GKE clusters and enable ACM via the Hub Feature API using Terraform
 2. Hydrate manifests from a set of Dry configs using Kustomize (typically undertaken Platform Engineering teams using the RootSync resource)
@@ -22,8 +22,6 @@ The example Git repository contains three namespaces for different tenants, thre
 config-root
 ├── base
 │   ├── cluster
-│   │   ├── agents
-│   │   │   └── datadog.yaml
 │   │   ├── connect-gateway
 │   │   │   ├── admin-permission.yaml
 │   │   │   └── impersonate.yaml
