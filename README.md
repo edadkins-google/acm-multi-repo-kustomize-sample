@@ -75,8 +75,8 @@ Run the `run.sh` helper script with the `-c` flag to provision the following ser
 - Enable and configure ACM for the clusters
 
 ```
-$ cd terraform
-$ ./run.sh -c
+$ cd scripts
+$ ./provision.sh -c
 ```
 
 You'll be prompted to enter your GCP Project Name and your forked Git URL i.e. `https://github.com/<YOUR_ORGANIZATION>/acm-multi-repo-kustomize-sample.git`.
@@ -87,7 +87,7 @@ The provisioning should take <30 mins, once complete, there will be three GKE cl
 
 After making changes i.e. adding a new tenant or resource, you should rebuild the kustomize output by running the `render.sh` script.
 ```
-$ cd config-root
+$ cd scripts
 $ ./render.sh
 ```
 
