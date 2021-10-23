@@ -11,7 +11,8 @@ module "enabled_google_apis" {
     "gkehub.googleapis.com",
     "anthosconfigmanagement.googleapis.com",
     "cloudresourcemanager.googleapis.com",
-    "anthos.googleapis.com"
+    "anthos.googleapis.com",
+    "sqladmin.googleapis.com"
   ]
 }
 
