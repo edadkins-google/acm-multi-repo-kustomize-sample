@@ -11,7 +11,7 @@
 ## Getting Started
 
 ### Prerequisites/Requirements
-This section describes prerequisites you must meet before this tutorial.
+This section describes the prerequisites you must meet before continuing.
 - `terraform` is installed on your machine.
 - `git` is installed on your machine.
 - `kustomize` is installed in your local machine. If not, you can install it by `gcloud components install kustomize`.
@@ -91,7 +91,7 @@ $ git push origin main
 
 ### Make changes to your Cluster's configuration
 
-After making changes i.e. adding a new tenant or resource, you should hyrdrate your manifests by running the `render.sh` script.
+After making changes i.e. adding a new tenant or resource, you should hydrate your manifests by running the `render.sh` script.
 ```
 $ ./render.sh
 ```
